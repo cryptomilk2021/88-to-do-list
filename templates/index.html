@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+</head>
+<body>
+    <h2>Add task</h2>
+
+
+    <form action="/add" method="post">
+<tr>
+  <td>task <input type = "text" name = "task" /></td>
+  <td>due date <input type = "text" name = "due_date" /></td>
+  <td><input type = "submit" value = "Add task" /></td>
+</tr>
+    </form>
+
+
+
+    <h2>Current tasks</h2>
+
+
+
+<table>
+    <tr><td>ID</td><td>task</td><td>date due</td></tr>
+{# loop through current tasks #}
+        {% for i in todo %}
+    <tr>
+        {% if i.completed_date is none %}
+            <td>{{ i.id }} </td><td> {{ i.task }}</td><td> {{ i.due_date }}</td> <form action="/finish/{{ i.id }}" method="post"><td><input type = "submit" value = "Complete" /></td>
+
+    </form>
+
+
+
+
+        {% endif %}
+    </tr>
+        {% endfor %}
+</table>
+
+
+
+
+
+    <h2>Completed tasks</h2>
+
+<table>
+        <tr><td>ID</td><td>task</td><td>date due</td><td>date completed</td></tr>
+{#    loop through tasks #}
+        {% for i in todo %}
+    <tr>
+        {% if i.completed_date is not none %}
+            <td>{{ i.id }} </td><td> {{ i.task }} </td><td> {{ i.due_date }} </td><td> {{ i.completed_date }}</td>
+        {% endif %}
+        </tr>
+        {% endfor %}
+</table>
+
+
+
+</body>
+</html>
